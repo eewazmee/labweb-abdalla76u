@@ -2,7 +2,7 @@
 
 ## Objectifs
 
-L'objectif de cet séance est de se familiariser avec les technologies du Web (HTML, CSS, HTTP) afin de réaliser quelques "pages web" et ensuite une application web de gestion de trombinoscope en utilisant le framework Python `Flask` et un petit modèle relationnel.
+L'objectif de cette séance est de se familiariser avec les technologies du Web (HTML, CSS, HTTP) afin de réaliser quelques "pages web" et ensuite une application web de gestion de trombinoscope en utilisant le framework Python `Flask` et un petit modèle relationnel.
 
 
 ## Étape 1 - Mise en place d'un environnement virtuel Python
@@ -82,7 +82,6 @@ Dans cette étape, nous vous invitons à réaliser une première page HTML perme
 
 ![Run PowerShell as Admin](./figures/telecombook-screenshot.png)
 
-
 Dans un premier temps, vous vous contenterez de réaliser une page statique (aucun server n'est donc nécessaire pour générer les pages).
 
 Afin de faciliter votre travail, nous vous invitons à installer l'extension LiveServer (https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) dans votre environnement VisualStudio Code. Cette extensions permet de démarrer un serveur HTTP qui vous "sert" le contenu d'un répertoire à travers le protocole HTTP.
@@ -136,13 +135,13 @@ Sous Windows (PowerShell), il faut utiliser la commande suivante :
 ```
 
 
-Vous pouvez dés à présent, accéder au contenu servi par votre serveur en utilisant votre navigateur web habituel et en vous rendant à l'adresse [http://127.0.0.1:5000/](). Si vous havez besoin de quelques explications sur la signification de cette URL (http://127.0.0.1:5000/), n'hésitez pas à demander à votre enseignant.
+Vous pouvez dès à présent, accéder au contenu servi par votre serveur en utilisant votre navigateur web habituel et en vous rendant à l'adresse [http://127.0.0.1:5000/](). Si vous avez besoin de quelques explications sur la signification de cette URL (http://127.0.0.1:5000/), n'hésitez pas à demander à votre enseignant.
 
 
 ### Beaucoup de choses à tester
 
 - Essayez de modifier le contenu retourné par votre serveur.
-- Essayer d'ajouter d'autres contenus servis sur d'autres URI 
+- Essayez d'ajouter d'autres contenus servis sur d'autres URI 
   - par exemple `/lists` retourne un contenu présentant une potentielle liste des années de la formation.
  
     > **FISE**
@@ -171,17 +170,17 @@ Vous pouvez dés à présent, accéder au contenu servi par votre serveur en uti
   **Rappel** : La gestion des URIs de type `/lists/fise1a` peut s'effectuer en utilisant une annotation du type `app.route('/lists/<int:str>)`, la valeur `list_id` étant alors passée automatiquement à votre fonction sous forme de paramètre. 
 
 
- - Tester le passage de paramètre dans les routes, par exemple `/lists?formation=fise&year=1a` permet d'accéder au contenu précédent.
-- Essayer maintenant de charger les données que vous "servez" à partir de fichiers `.csv`.
-- Regarder du côté des templates (https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates) pour générer vos pages HTML.
+ - Testez le passage de paramètre dans les routes, par exemple `/lists?formation=fise&year=1a` permet d'accéder au contenu précédent.
+- Essayez maintenant de charger les données que vous "servez" à partir de fichiers `.csv`.
+- Regardez du côté des templates (https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates) pour générer vos pages HTML.
 
 
 
 ## Étape 3 -- Utilisation des données de la base relationnelle
 
-Vous allez maintenant modifier votre programme (serveur) pour servir un contenu qui soit généré dynamiquement à partir du contenu de votre base relationnelle.
+Vous allez maintenant modifier votre programme (serveur) pour servir un contenu qui sera généré dynamiquement à partir du contenu de votre base relationnelle.
 
-Ajouter dans votre repertoire le fichier correspondant à votre base relationnelle au format sqlite (dans la suite, nous utiliserons `trombi.db`). Pensez à insérer quelques données dans votre base.
+Ajouter dans votre répertoire le fichier correspondant à votre base relationnelle au format sqlite (dans la suite, nous utiliserons `trombi.db`). Pensez à insérer quelques données dans votre base.
 
 Vous aurez besoin de consulter :
 
@@ -244,15 +243,14 @@ Voilà vous avez quasiment tout pour créer votre application (tout du moins en 
 
 Ensuite, il faudra regarder du côté des formulaires HTML pour pouvoir permettre à l'utilisateur de saisir des données, des requêtes HTTP POST pour pouvoir envoyer ces données et les insérer dans votre base de données.
 
-
 ----
 
 ### Création/activation de l'environnement sous Windows (PowerShell)
 
 Nous ne vous conseillons pas pour les TPs de CS54 de travailler directement sous votre environnement Windows.
-Nous vous invitons plutôt à utiliser la machine virtuelle sous VirtualBox qui vous a été fournie. Si vous utilisez tous le même environnement, nous pourrons plus facilement apportez de l'aide à chacun, plutôt que de passer beaucoup de temps avec un(e) seul(e) élève pour résoudre son problème sur son environnement spécifique.
+Nous vous invitons plutôt à utiliser la machine virtuelle sous VirtualBox qui vous a été fournie. Si vous utilisez tous le même environnement, nous pourrons plus facilement apporter de l'aide à chacun, plutôt que de passer beaucoup de temps avec un(e) seul(e) élève pour résoudre son problème sur son environnement spécifique.
 
-Toutefois, l'ensemble des développements que vous réalisez peuvent normalement fonctionner sous Windows.
+Toutefois, l'ensemble des développements que vous réalisez peuvent normalement fonctionner sous Windows ou tout autre système d'exploitation moderne.
 
 Vous pouvez procéder de la même manière sous un shell PowerShell
 
@@ -278,7 +276,7 @@ Si vous obtenez une erreur au moment de l'exécution du script, il faut modifier
 PS C:\> Set-ExecutionPolicy AllSigned
 ```
 
-Une fois une nouvel PowerShell lancé, vous devriez pouvoir exécuter le script d'activation
+Une fois un nouvel PowerShell lancé, vous devriez pouvoir exécuter le script d'activation.
 
 
 ```powershell
