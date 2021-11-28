@@ -18,7 +18,7 @@ L'objectif de cette séance est de se familiariser avec les technologies du Web 
 Voici comment procédez sous un shell de type `sh`. *(les commandes spécifiques à Windows sont présentées en fin de document)*
 
 ```sh
-$ cd lab3-oster7 # positionnons nous dans votre dépôt git local 
+$ cd lab4-oster7 # positionnons nous dans votre dépôt git local 
                  # que vous aurez clonez auparavant
 
 $ python3 -m venv env # ceci à pour effet de vous créer un répertoire
@@ -255,7 +255,7 @@ Toutefois, l'ensemble des développements que vous réalisez peuvent normalement
 Vous pouvez procéder de la même manière sous un shell PowerShell
 
 ```powershell
-PS C:\> cd lab3-oster7 # positionnons nous dans votre dépôt git local 
+PS C:\> cd lab4-oster7 # positionnons nous dans votre dépôt git local 
                        # que vous aurez clonez auparavant
 
 PS C:\> python3 -m venv env # ceci à pour effet de vous créer un
