@@ -89,10 +89,10 @@ Afin de faciliter votre travail, nous vous invitons à installer l'extension Liv
 Vous trouverez dans le répertoire `data/`, un fichier dénommé `students.csv` contenant des informations concernant des étudiants fictifs. Vous pourrez y retrouver leur nom, prénom et identifiant d'étudiant, ainsi que le chemin vers leur photo.
 
 ```csv
-photos/MTc5MTc1LmpwZw.jpg,Ullrich Jacinthe,1960075
-photos/MjI2ODU4LmpwZw.jpg,Gulgowski Kelley,93683681
-photos/MjI4ODUzLmpwZw.jpg,Schoen Joseph,78906724
-photos/MjI5NDA2LmpwZw.jpg,Bahringer Avery,29344860
+5,1,Gulgowski Kelley,93683681,photos/MjI2ODU4LmpwZw.jpg
+6,1,Schoen Joseph,78906724,photos/MjI4ODUzLmpwZw.jpg
+7,1,Bahringer Avery,29344860,photos/MjI5NDA2LmpwZw.jpg
+8,1,Stamm Levi,79192852,photos/MjIwOTg3LmpwZw.jpg
 ...
 ```
 
@@ -142,7 +142,7 @@ Vous pouvez dès à présent, accéder au contenu servi par votre serveur en uti
 
 - Essayez de modifier le contenu retourné par votre serveur.
 - Essayez d'ajouter d'autres contenus servis sur d'autres URI 
-  - par exemple `/lists` retourne un contenu présentant une potentielle liste des années de la formation.
+  - par exemple `/lists` retourne un contenu présentant une potentielle liste des années de la formation et chaque lien hypertexte pointe vers une URL du genre `/static/fise1a.html` donnant accès au trombinoscope de la promotion spécifiée.
  
     > **FISE**
     > * [1A](FISE1A)
@@ -155,7 +155,7 @@ Vous pouvez dès à présent, accéder au contenu servi par votre serveur en uti
     > * [3A](FISA3A)
   - Regarder comment vous pouvez servir du contenu statique (les pages HTML que vous avez réalisées lors de la seconde étape) en utilisant le framework Flask (https://flask.palletsprojects.com/en/2.0.x/quickstart/#static-files)
 
-  - Tester l'écriture de différentes routes. Par exemple la route `/lists/fise1a` pourrait vous retourner un contenu présentant une liste d'étudiants.
+  - Tester l'écriture de différentes routes. Par exemple la route `/lists/fise1a.json` pourrait vous retourner un contenu présentant une liste d'étudiants.
   ```python
   [
     [ 'photos/MTA2NDY4LmpwZw.jpg', 'Mayer Creola', 15098606 ],
@@ -167,22 +167,55 @@ Vous pouvez dès à présent, accéder au contenu servi par votre serveur en uti
   ]
   ```
 
-  **Rappel** : La gestion des URIs de type `/lists/fise1a` peut s'effectuer en utilisant une annotation du type `app.route('/lists/<int:str>)`, la valeur `list_id` étant alors passée automatiquement à votre fonction sous forme de paramètre. 
+  **Rappel** : La gestion des URIs de type `/lists/fise/1a` peut s'effectuer en utilisant une annotation du type `app.route('/lists/<str:formation>/<str:year>)`, les valeurs `formation`et `year` étant alors passées automatiquement à votre fonction sous forme de paramètre. 
 
-
- - Testez le passage de paramètre dans les routes, par exemple `/lists?formation=fise&year=1a` permet d'accéder au contenu précédent.
+- Testez également le passage de paramètre dans les routes, par exemple `/lists?formation=fise&year=1a` permet d'accéder au contenu précédent.
 - Essayez maintenant de charger les données que vous "servez" à partir de fichiers `.csv`.
-- Regardez du côté des templates (https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates) pour générer vos pages HTML.
+- Regardez du côté des templates (https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates) pour générer vos pages HTML et non plus servir des pages statiques.
+- Mettez en place une page sur la route `/` donnant accès à formulaire constitué de deux listes déroulantes permettant de choisir la formation et l'année. Le formulaire sera soumis à l'URL `/lists`. Cela devrait donc rediriger l'utilisateur sur les trombinoscopes précédemment réalisés.
 
 
+## Étape 4 -- Utilisation des données de la base relationnelle
 
-## Étape 3 -- Utilisation des données de la base relationnelle
+Vous allez maintenant modifier votre programme (serveur) pour servir un contenu qui sera généré dynamiquement à partir du contenu d'une base de données relationnelles.
 
-Vous allez maintenant modifier votre programme (serveur) pour servir un contenu qui sera généré dynamiquement à partir du contenu de votre base relationnelle.
+Vous pouvez utiliser votre serveur de base de données PostgreSQL que vous avez installé lors des séances BD du module. Dans ce cas, reportez vous au tutoriel d'utilisation du module Flask-SQLAlchemy (https://flask-sqlalchemy.palletsprojects.com/en/2.x/). Nous allons plutôt utilisé ici une base de données plus légère : SQLite.
 
-Ajouter dans votre répertoire le fichier correspondant à votre base relationnelle au format sqlite (dans la suite, nous utiliserons `trombi.db`). Pensez à insérer quelques données dans votre base.
+Vous pouvez installer cette base dans votre machine virtuelle en utilisant la commande suivante :
+```bash
+sudo apt-get install sqlite3
+```
 
-Vous aurez besoin de consulter :
+Les principales commandes de SQLite sont :
+```bash
+.help   # pour obtenir le l'aide en ligne
+.open   # pour ouvrir un fichier de base de données au format sqlite
+.quit   # pour quitter
+.tables # pour afficher l'ensemble des tables définies
+.schema # pour afficher les schémas de toutes les tables
+```
+
+Voici quelques commandes rapides qui devraient vous permettre de créer une base simple et d'y importer les données issues du fichier `students.csv`
+```bash
+$ sqlite3
+
+SQLite version 3.36.0 2021-06-18 18:58:49
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open 'trombi.db'
+sqlite> CREATE TABLE formation (id INT PRIMARY KEY NOT NULL, formation VARCHAR(4), year int, description VARCHAR);
+sqlite> INSERT INTO formation VALUES (1, 'FISE', 1, 'Promotion 2024');
+sqlite> INSERT INTO formation VALUES (2, 'FISE', 2, 'Promotion 2023');
+sqlite> INSERT INTO formation VALUES (3, 'FISE', 3, 'Promotion 2022');
+sqlite> CREATE TABLE students (id INT PRIMARY KEY NOT NULL, formation INT REFERENCES formation(id), name VARCHAR, student_id INT, photo VARCHAR);
+sqlite> .import 'students.csv' students
+```
+
+
+Vous allez maintenant utiliser ce fichier/cette base comme données de votre application web.
+
+Vous aurez sûrement besoin de consulter :
 
 - la documentation de la librairie sqlite3 pour Python : 
   https://docs.python.org/3/library/sqlite3.html
@@ -198,7 +231,7 @@ from flask import g
 
 import sqlite3
 
-DATABASE = 'trombi.db' # le nom du fichier de votre base sqlite3
+DATABASE = 'data/trombi.db' # le nom du fichier de votre base sqlite3
 
 app = Flask(__name__)
 
@@ -224,13 +257,13 @@ def index():
 @app.route('/students')
 def all_students():
     c = get_db().cursor() # on crée un curseur
-    c.execute("select * from students") # on exécute la requête
+    c.execute("select name, photo from students") # on exécute la requête
 
     content = '<b>Students</b>' 
 
     content += '<ul>'
     for tpl in c.fetchall(): # on parcours les tuples résultat 1 par 1
-        content += f'<li>{tpl[1]}</li>'
+        content += f'<li>{tpl[0]} -> {tpl[1]}</li>'
     content += '</ul>'
     
     return content
@@ -241,7 +274,7 @@ def all_students():
 
 Voilà vous avez quasiment tout pour créer votre application (tout du moins en mode consultation).
 
-Ensuite, il faudra regarder du côté des formulaires HTML pour pouvoir permettre à l'utilisateur de saisir des données, des requêtes HTTP POST pour pouvoir envoyer ces données et les insérer dans votre base de données.
+Ensuite, il faudra creuser du côté des formulaires HTML pour pouvoir permettre à l'utilisateur de saisir des données, des requêtes HTTP POST pour pouvoir envoyer ces données et les insérer dans votre base de données.
 
 ----
 
