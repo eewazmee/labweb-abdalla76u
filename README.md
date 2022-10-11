@@ -1,4 +1,4 @@
-# Lab #1 - Web Programming
+# Lab #Web - Web Programming
 
 ## Objectifs
 
@@ -18,7 +18,7 @@ L'objectif de cette séance est de se familiariser avec les technologies du Web 
 Voici comment procédez sous un shell de type `sh`. *(les commandes spécifiques à Windows sont présentées en fin de document)*
 
 ```sh
-$ cd lab4-oster7 # positionnons nous dans votre dépôt git local 
+$ cd labweb-oster7 # positionnons nous dans votre dépôt git local 
                  # que vous aurez clonez auparavant
 
 $ python3 -m venv env # ceci à pour effet de vous créer un répertoire
@@ -111,7 +111,7 @@ Vous pouvez réaliser plusieurs pages pour plusieurs "promotions" et mettre en p
 
 ## Étape 3 -- Un premier serveur web
 
-Suivez le tutoriel Flask (https://flask.palletsprojects.com/en/2.0.x/quickstart/) pour créer votre premier "serveur web". Il suffit de recopier le code suivant dans un fichier `hello.py`.
+Suivez le tutoriel Flask (https://flask.palletsprojects.com/en/2.2.x/quickstart/) pour créer votre premier "serveur web". Il suffit de recopier le code suivant dans un fichier `hello.py`.
 
 ```python
 from flask import Flask
@@ -171,7 +171,7 @@ Vous pouvez dès à présent, accéder au contenu servi par votre serveur en uti
 
 - Testez également le passage de paramètre dans les routes, par exemple `/lists?formation=fise&year=1a` permet d'accéder au contenu précédent.
 - Essayez maintenant de charger les données que vous "servez" à partir de fichiers `.csv`.
-- Regardez du côté des templates (https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates) pour générer vos pages HTML et non plus servir des pages statiques.
+- Regardez du côté des templates (https://flask.palletsprojects.com/en/2.2.x/quickstart/#rendering-templates) pour générer vos pages HTML et non plus servir des pages statiques.
 - Mettez en place une page sur la route `/` donnant accès à formulaire constitué de deux listes déroulantes permettant de choisir la formation et l'année. Le formulaire sera soumis à l'URL `/lists`. Cela devrait donc rediriger l'utilisateur sur les trombinoscopes précédemment réalisés.
 
 
@@ -179,7 +179,7 @@ Vous pouvez dès à présent, accéder au contenu servi par votre serveur en uti
 
 Vous allez maintenant modifier votre programme (serveur) pour servir un contenu qui sera généré dynamiquement à partir du contenu d'une base de données relationnelles.
 
-Vous pouvez utiliser votre serveur de base de données PostgreSQL que vous avez installé lors des séances BD du module. Dans ce cas, reportez vous au tutoriel d'utilisation du module Flask-SQLAlchemy (https://flask-sqlalchemy.palletsprojects.com/en/2.x/). Nous allons plutôt utilisé ici une base de données plus légère : SQLite.
+Vous pouvez utiliser votre serveur de base de données PostgreSQL que vous avez installé lors des séances BD du module. Dans ce cas, reportez vous au tutoriel d'utilisation du module Flask-SQLAlchemy (https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/). Nous allons plutôt utilisé ici une base de données plus légère : SQLite.
 
 Vous pouvez installer cette base dans votre machine virtuelle en utilisant la commande suivante :
 ```bash
@@ -220,7 +220,7 @@ Vous aurez sûrement besoin de consulter :
 - la documentation de la librairie sqlite3 pour Python : 
   https://docs.python.org/3/library/sqlite3.html
 - le tutoriel Flask dédié à sqlite3 : 
-  https://flask.palletsprojects.com/en/2.0.x/patterns/sqlite3/#sqlite3
+  https://flask.palletsprojects.com/en/2.2.x/patterns/sqlite3/#sqlite3
 
 
 Voici un exemple très basique de ce que vous devriez faire et surtout compléter :
@@ -288,7 +288,7 @@ Toutefois, l'ensemble des développements que vous réalisez peuvent normalement
 Vous pouvez procéder de la même manière sous un shell PowerShell
 
 ```powershell
-PS C:\> cd lab4-oster7 # positionnons nous dans votre dépôt git local 
+PS C:\> cd labweb-oster7 # positionnons nous dans votre dépôt git local 
                        # que vous aurez clonez auparavant
 
 PS C:\> python3 -m venv env # ceci à pour effet de vous créer un
